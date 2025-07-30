@@ -19,219 +19,6 @@ const searchBtn = document.getElementById('search-btn');
 const channelSearch = document.getElementById('channel-search');
 const analyticsSection = document.getElementById('analytics-section');
 
-// Initialize charts
-function initializeCharts() {
-    // Subscriber Growth Chart (Line)
-    const subscriberCtx = document.getElementById('subscriberChart').getContext('2d');
-    subscriberChart = new Chart(subscriberCtx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Subscribers',
-                data: [12000, 19000, 15000, 22000, 18000, 25000, 30000, 28000, 32000, 35000, 40000, 45000],
-                borderColor: '#00ffcc',
-                backgroundColor: 'rgba(0, 255, 204, 0.1)',
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Subscriber Growth',
-                    font: {
-                        size: 16
-                    }
-                },
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: false
-                }
-            }
-        }
-    });
-
-    // Video Uploads Chart (Bar)
-    const videoCtx = document.getElementById('videoChart').getContext('2d');
-    videoChart = new Chart(videoCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Videos',
-                data: [4, 6, 5, 8, 7, 9, 10, 8, 7, 6, 5, 4],
-                backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Video Uploads',
-                    font: {
-                        size: 16
-                    }
-                },
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    // Views Over Time Chart (Pie)
-    const viewsCtx = document.getElementById('viewsChart').getContext('2d');
-    viewsChart = new Chart(viewsCtx, {
-        type: 'pie',
-        data: {
-            labels: ['0-1 min', '1-5 min', '5-10 min', '10-20 min', '20+ min'],
-            datasets: [{
-                data: [15, 30, 25, 20, 10],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'View Duration',
-                    font: {
-                        size: 16
-                    }
-                }
-            }
-        }
-    });
-
-    // Revenue Trends Chart (Doughnut)
-    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-    revenueChart = new Chart(revenueCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Ad Revenue', 'Sponsorships', 'Merchandise', 'Memberships', 'Other'],
-            datasets: [{
-                data: [65, 15, 10, 5, 5],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Revenue Sources',
-                    font: {
-                        size: 16
-                    }
-                }
-            }
-        }
-    });
-
-    // Engagement Metrics Chart (Radar)
-    const engagementCtx = document.getElementById('engagementChart').getContext('2d');
-    engagementChart = new Chart(engagementCtx, {
-        type: 'radar',
-        data: {
-            labels: ['Likes', 'Comments', 'Shares', 'Watch Time', 'Click-through'],
-            datasets: [{
-                label: 'Engagement',
-                data: [80, 60, 70, 90, 50],
-                backgroundColor: 'rgba(0, 255, 204, 0.2)',
-                borderColor: 'rgba(0, 255, 204, 1)',
-                pointBackgroundColor: 'rgba(0, 255, 204, 1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(0, 255, 204, 1)'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Engagement Metrics',
-                    font: {
-                        size: 16
-                    }
-                }
-            },
-            scales: {
-                r: {
-                    angleLines: {
-                        display: true
-                    },
-                    suggestedMin: 0,
-                    suggestedMax: 100
-                }
-            }
-        }
-    });
-
-    // Audience Demographics Chart (Polar Area)
-    const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
-    demographicsChart = new Chart(demographicsCtx, {
-        type: 'polarArea',
-        data: {
-            labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
-            datasets: [{
-                label: 'Age Distribution',
-                data: [35, 40, 15, 7, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Audience Age',
-                    font: {
-                        size: 16
-                    }
-                }
-            }
-        }
-    });
-}
-
 // Calculate estimated revenue
 function calculateRevenue(views, country) {
     const rpm = RPM_RATES[country] || 2.0; // Default RPM if country not in list
@@ -296,6 +83,268 @@ async function getChannelDetails(channelId) {
         console.error('Error fetching channel details:', error);
         return null;
     }
+}
+
+// Destroy existing charts
+function destroyCharts() {
+    if (subscriberChart) subscriberChart.destroy();
+    if (videoChart) videoChart.destroy();
+    if (viewsChart) viewsChart.destroy();
+    if (revenueChart) revenueChart.destroy();
+    if (engagementChart) engagementChart.destroy();
+    if (demographicsChart) demographicsChart.destroy();
+}
+
+// Create charts with channel data
+function createCharts(channelData) {
+    const stats = channelData.statistics || {};
+    const subscriberCount = parseInt(stats.subscriberCount) || 10000;
+    const videoCount = parseInt(stats.videoCount) || 50;
+    const viewCount = parseInt(stats.viewCount) || 100000;
+    
+    // Generate monthly data based on channel stats
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const subscriberData = months.map((_, i) => 
+        Math.floor((subscriberCount / 12) * (i + 1) * (0.8 + Math.random() * 0.4))
+    );
+    const videoData = months.map(() => 
+        Math.floor((videoCount / 12) * (0.7 + Math.random() * 0.6))
+    );
+    
+    // Subscriber Growth Chart (Line)
+    const subscriberCtx = document.getElementById('subscriberChart').getContext('2d');
+    subscriberChart = new Chart(subscriberCtx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Subscribers',
+                data: subscriberData,
+                borderColor: '#00ffcc',
+                backgroundColor: 'rgba(0, 255, 204, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Subscriber Growth',
+                    font: {
+                        size: 16
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+
+    // Video Uploads Chart (Bar)
+    const videoCtx = document.getElementById('videoChart').getContext('2d');
+    videoChart = new Chart(videoCtx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Videos',
+                data: videoData,
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Video Uploads',
+                    font: {
+                        size: 16
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Views Over Time Chart (Pie)
+    const viewsCtx = document.getElementById('viewsChart').getContext('2d');
+    viewsChart = new Chart(viewsCtx, {
+        type: 'pie',
+        data: {
+            labels: ['0-1 min', '1-5 min', '5-10 min', '10-20 min', '20+ min'],
+            datasets: [{
+                data: [
+                    Math.floor(viewCount * 0.15),
+                    Math.floor(viewCount * 0.30),
+                    Math.floor(viewCount * 0.25),
+                    Math.floor(viewCount * 0.20),
+                    Math.floor(viewCount * 0.10)
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'View Duration',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+
+    // Revenue Trends Chart (Doughnut)
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    const totalRevenue = (viewCount / 1000) * (RPM_RATES[channelData.snippet.country] || 2.0);
+    revenueChart = new Chart(revenueCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Ad Revenue', 'Sponsorships', 'Merchandise', 'Memberships', 'Other'],
+            datasets: [{
+                data: [
+                    Math.floor(totalRevenue * 0.65),
+                    Math.floor(totalRevenue * 0.15),
+                    Math.floor(totalRevenue * 0.10),
+                    Math.floor(totalRevenue * 0.05),
+                    Math.floor(totalRevenue * 0.05)
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Revenue Sources',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+
+    // Engagement Metrics Chart (Radar)
+    const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+    engagementChart = new Chart(engagementCtx, {
+        type: 'radar',
+        data: {
+            labels: ['Likes', 'Comments', 'Shares', 'Watch Time', 'Click-through'],
+            datasets: [{
+                label: 'Engagement',
+                data: [
+                    Math.floor(80 * (subscriberCount / 10000)),
+                    Math.floor(60 * (subscriberCount / 10000)),
+                    Math.floor(70 * (subscriberCount / 10000)),
+                    Math.floor(90 * (viewCount / 100000)),
+                    Math.floor(50 * (viewCount / 100000))
+                ],
+                backgroundColor: 'rgba(0, 255, 204, 0.2)',
+                borderColor: 'rgba(0, 255, 204, 1)',
+                pointBackgroundColor: 'rgba(0, 255, 204, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 255, 204, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Engagement Metrics',
+                    font: {
+                        size: 16
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
+            }
+        }
+    });
+
+    // Audience Demographics Chart (Polar Area)
+    const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
+    demographicsChart = new Chart(demographicsCtx, {
+        type: 'polarArea',
+        data: {
+            labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+            datasets: [{
+                label: 'Age Distribution',
+                data: [
+                    Math.floor(35 * (subscriberCount / 10000)),
+                    Math.floor(40 * (subscriberCount / 10000)),
+                    Math.floor(15 * (subscriberCount / 10000)),
+                    Math.floor(7 * (subscriberCount / 10000)),
+                    Math.floor(3 * (subscriberCount / 10000))
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Audience Age',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
 }
 
 // Update UI with channel data
@@ -371,52 +420,14 @@ function updateUI(channelData) {
     document.getElementById('total-revenue').textContent = revenue;
     document.getElementById('revenue-country').textContent = `Country: ${country}`;
     
+    // Destroy any existing charts
+    destroyCharts();
+    
+    // Create new charts with actual data
+    createCharts(channelData);
+    
     // Show analytics section
     analyticsSection.style.display = 'block';
-    
-    // Update charts with some random variations based on channel data
-    updateCharts(channelData);
-}
-
-// Update charts with channel data
-function updateCharts(channelData) {
-    const stats = channelData.statistics || {};
-    const subscriberCount = parseInt(stats.subscriberCount) || 10000;
-    const videoCount = parseInt(stats.videoCount) || 50;
-    const viewCount = parseInt(stats.viewCount) || 100000;
-    
-    // Subscriber Growth Chart
-    const subscriberData = subscriberChart.data.datasets[0].data;
-    const baseSubscribers = subscriberCount / 2;
-    subscriberChart.data.datasets[0].data = subscriberData.map((_, i) => 
-        Math.floor(baseSubscribers + (i * (subscriberCount / 12)) * (0.8 + Math.random() * 0.4))
-    );
-    subscriberChart.update();
-    
-    // Video Uploads Chart
-    const videoData = videoChart.data.datasets[0].data;
-    const avgVideos = videoCount / 12;
-    videoChart.data.datasets[0].data = videoData.map(() => 
-        Math.floor(avgVideos * (0.7 + Math.random() * 0.6))
-    );
-    videoChart.update();
-    
-    // Views Over Time Chart
-    const viewsData = viewsChart.data.datasets[0].data;
-    viewsChart.data.datasets[0].data = viewsData.map(value => 
-        Math.floor(value * (viewCount / 100000) * (0.8 + Math.random() * 0.4))
-    );
-    viewsChart.update();
-    
-    // Revenue Trends Chart - keep percentages but scale to view count
-    const revenueData = revenueChart.data.datasets[0].data;
-    const totalRevenue = (viewCount / 1000) * 2.5; // Using default RPM
-    revenueChart.data.datasets[0].data = revenueData.map((percent, i) => 
-        Math.floor((percent / 100) * totalRevenue)
-    );
-    revenueChart.update();
-    
-    // Engagement and Demographics charts remain similar as they're not directly tied to stats
 }
 
 // Event listener for search button
@@ -460,7 +471,6 @@ searchBtn.addEventListener('click', async () => {
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
-    initializeCharts();
     analyticsSection.style.display = 'none';
     
     // Allow search on Enter key
